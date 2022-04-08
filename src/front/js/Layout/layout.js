@@ -1,14 +1,18 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ScrollToTop from "./component/scrollToTop";
+import ScrollToTop from "../component/scrollToTop";
 
-import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
-import injectContext from "./store/appContext";
+//VIEWS
+import Landing from "../views/Landing/Landing.jsx"
+import Signup from "../views/Signup/Signup.jsx";
+import Login from "../views/Login/Login.jsx";
+import Private from "../views/Private/Private.jsx";
 
-import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
+
+
+import injectContext from "../store/appContext";
+//COMPONENTS
+import { Navbar } from "../component/navbar.jsx";
 
 //create your first component
 const Layout = () => {
@@ -23,19 +27,21 @@ const Layout = () => {
 					<Navbar />
 					<Switch>
 						<Route exact path="/">
-							<Home />
+							<Landing />
 						</Route>
-						<Route exact path="/demo">
-							<Demo />
+						<Route exact path="/Signup">
+							<Signup />
 						</Route>
-						<Route exact path="/single/:theid">
-							<Single />
+						<Route exact path="/Login">
+							<Login />
+						</Route>
+						<Route exact path="/Private">
+							<Private />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>
 						</Route>
 					</Switch>
-					<Footer />
 				</ScrollToTop>
 			</BrowserRouter>
 		</div>
