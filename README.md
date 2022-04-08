@@ -25,12 +25,3 @@ It is recomended to install the backend first, make sure you have Python 3.8, Pi
 
 1. Install the packages: `$ npm install`
 2. Start coding! start the webpack dev server `$ npm run start`
-
-## Publish your website!
-
-This boilerplate it's 100% integrated with Herkou, just by pushing your changes to the heroku repository it will deploy: `$ git push heroku main`
-
-
-		// "prettier-webpack-plugin": "^1.2.0",
-"dotenv-webpack": "^1.7.0",
-		"friendly-errors-webpack-plugin": "^1.7.0",
