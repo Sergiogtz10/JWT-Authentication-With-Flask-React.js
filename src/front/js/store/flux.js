@@ -1,7 +1,12 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
-		store: {},
-		actions: {},
+		store: {logged: false,},
+		actions: {
+		setLogged: (log) => {
+			const store = getStore();
+			setStore({ ...store, logged: log });
+		},
+		}
 	}
 };
 

@@ -1,7 +1,34 @@
-import React, { useState } from "react";
+import React, {useContext}  from "react";
+import { Context } from "../../store/appContext.js";
+import {  userLogin  } from "../../Service/Users.js";
+import { useHistory } from "react-router-dom";
 import "./Login.css";
 
+let email = "";
+let password = "";
+
 const Login = () => {
+  const { actions } = useContext(Context);
+  let history = useHistory();
+
+  const handleClick = async (e) => {
+  e.preventDefault()
+  try {
+    const user = {
+        email: email,
+        password: password,
+    };
+    const response = await userLogin(user);
+    const data = await response.json();
+    if (response.status === 200) {
+        localStorage.setItem("token", data);
+        actions.setLogged(true);
+        history.push("/Private");
+    }
+} catch (err) {
+    console.log(err);
+}
+};
   return (
     <div className="p-5 mt-5">
       <div className="Signup-Login container mb-3 text-center text-white p-4">
@@ -12,9 +39,8 @@ const Login = () => {
                 <input
                 type="email"
                 className="form-control shadow-sm mb-3"
-                id="input"
                 placeholder="Email"
-                name="email"
+                onChange={(e) => email = e.target.value.toLowerCase()}
                 ></input>
             </div>
 
@@ -22,13 +48,14 @@ const Login = () => {
             <input
               type="password"
               className="form-control shadow-sm"
-              id="input"
               placeholder="Contraseña"
-              name="password"
+              onChange={(e) => password = e.target.value}
             ></input>
           </div>
           <div className="p-3">
-            <button type="submit" className="btn btn-outline-success boton col-md-8">
+            <button type="submit" className="btn btn-outline-success boton col-md-8"   onClick={() => {
+                    handleClick();
+                }}>
               Entrar
             </button>
           </div>
