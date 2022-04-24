@@ -9,8 +9,8 @@ const Landing = () =>{
             <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Indie+Flower&family=Montserrat:wght@300&family=Pacifico&family=Righteous&display=swap" rel="stylesheet"></link>
                 <h3 className="text-white p-4">Sign Up or Login</h3>
                 <div className="botones">
-                    <Link to="/Signup"><button type="button" className="btn btn-outline-success boton d-block mb-4 col-md-8">Sign Up</button></Link>
-                    <Link to="/Login"><button type="button" className="btn btn-outline-success boton d-block col-md-8">Login</button></Link> 
+                    <Link to="/signup"><button type="button" className="btn btn-outline-success boton d-block mb-4 col-md-8">Sign Up</button></Link>
+                    <Link to="/login"><button type="button" className="btn btn-outline-success boton d-block col-md-8">Login</button></Link> 
                 </div>
                 
             </div>

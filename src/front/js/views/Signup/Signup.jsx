@@ -17,7 +17,7 @@ const Signup = () =>{
             }
             e.preventDefault()
             await Register(user)
-            history.push("/Login")
+            history.push("/login")
 
         } catch { (err) => console.log(err) }
 

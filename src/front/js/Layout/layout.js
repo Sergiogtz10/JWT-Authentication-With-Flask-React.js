@@ -29,13 +29,13 @@ const Layout = () => {
 						<Route exact path="/">
 							<Landing />
 						</Route>
-						<Route exact path="/Signup">
+						<Route exact path="/signup">
 							<Signup />
 						</Route>
-						<Route exact path="/Login">
+						<Route exact path="/login">
 							<Login />
 						</Route>
-						<Route exact path="/Private">
+						<Route exact path="/private">
 							<Private />
 						</Route>
 						<Route>

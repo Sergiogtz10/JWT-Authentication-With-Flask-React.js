@@ -7,7 +7,7 @@ class User(db.Model):
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
     def __repr__(self):
-        return "<User %r>" % self.id
+        return "<User %r>" % self.User
 
     def serialize(self):
         return {

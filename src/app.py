@@ -12,7 +12,9 @@ from api.routes import api
 from api.admin import setup_admin
 
 from flask_jwt_extended import JWTManager
-
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import get_jwt_identity
 
 
 ENV = os.getenv("FLASK_ENV")

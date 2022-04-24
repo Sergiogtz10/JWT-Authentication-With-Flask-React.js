@@ -1,5 +1,4 @@
-import React, {useContext}  from "react";
-import { Context } from "../../store/appContext.js";
+import React from "react";
 import {  userLogin  } from "../../Service/Users.js";
 import { useHistory } from "react-router-dom";
 import "./Login.css";
@@ -8,7 +7,7 @@ let email = "";
 let password = "";
 
 const Login = () => {
-  const { actions } = useContext(Context);
+  
   let history = useHistory();
 
   const handleClick = async (e) => {
@@ -22,8 +21,7 @@ const Login = () => {
     const data = await response.json();
     if (response.status === 200) {
         localStorage.setItem("token", data);
-        actions.setLogged(true);
-        history.push("/Private");
+        history.push("/private");
     }
 } catch (err) {
     console.log(err);

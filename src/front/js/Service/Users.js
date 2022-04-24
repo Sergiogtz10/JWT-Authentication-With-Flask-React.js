@@ -1,14 +1,14 @@
 const URL =
-  "https://3001-4geeksacademy-reactflask-waxr5mjs6dx.ws-eu41.gitpod.io";
+  "https://3001-sergiogtz10-jwtauthenti-hcm5q0h69pk.ws-eu42.gitpod.io";
 
 
 export const Register = (user) => {
   return fetch(`${URL}/api/signup`, {
     method: "POST",
-    body: JSON.stringify(user),
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify(user),
   });
 };
 
