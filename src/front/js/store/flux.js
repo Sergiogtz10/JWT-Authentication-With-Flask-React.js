@@ -1,50 +1,55 @@
 const getState = ({ getStore, getActions, setStore }) => {
+	const URL ="https://3001-sergiogtz10-jwtauthenti-hcm5q0h69pk.ws-eu42.gitpod.io";
 	return {
 	  store: {
-		message: null,
-		demo: [
-		  {
-			title: "FIRST",
-			background: "white",
-			initial: "white",
-		  },
-		  {
-			title: "SECOND",
-			background: "white",
-			initial: "white",
-		  },
-		],
-	  },
+		token: localStorage.getItem("token"),
+		},
 	  actions: {
-		// Use getActions to call a function within a fuction
-		exampleFunction: () => {
-		  getActions().changeColor(0, "green");
-		},
-  
-		getMessage: () => {
-		  // fetching data from the backend
-		  fetch(process.env.BACKEND_URL + "/api/hello")
-			.then((resp) => resp.json())
-			.then((data) => setStore({ message: data.message }))
-			.catch((error) =>
-			  console.log("Error loading message from backend", error)
-			);
-		},
-		changeColor: (index, color) => {
-		  //get the store
-		  const store = getStore();
-  
-		  //we have to loop the entire demo array to look for the respective index
-		  //and change its color
-		  const demo = store.demo.map((elm, i) => {
-			if (i === index) elm.background = color;
-			return elm;
-		  });
-  
-		  //reset the global store
-		  setStore({ demo: demo });
-		},
-	  },
+		signup: (email, pass) => {
+			fetch(URL + "/api/signup", {
+			  method: "POST",
+			  headers: {
+				"Content-Type": "application/json",
+			  },
+			  body: JSON.stringify({ email: email, password: pass }),
+			})
+			  .then((response) => response.json())
+			  .then((data) => console.log(data))
+			  .catch((err) => console.log(err));
+		  },
+	
+		login: (email, pass) => {
+			const store = getStore();
+			fetch(URL + "/api/login", {
+			  method: "POST",
+			  headers: {
+				"Content-Type": "application/json",
+			  },
+			  body: JSON.stringify({ email: email, password: pass }),
+			})
+			  .then((response) => response.json())
+			  .then((data) => {
+				setStore({ token: data });
+				sessionStorage.setItem("token", JSON.stringify(data));
+			  })
+			  .catch((err) => console.log(err));
+		  },
+		  
+		  private: () => {
+			const store = getStore();
+			fetch(URL + "api/private", {
+			  method: "GET",
+			  headers: {
+				Authorization: `Bearer ${store.token}`,
+			  },
+			})
+			  .then((response) => response.json())
+			  .then(() => console.log(store.token))
+			  .catch((err) => console.log(err));
+		  },
+		  
+
+	  }
 	};
   };
   

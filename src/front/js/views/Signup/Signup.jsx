@@ -1,6 +1,7 @@
 import React from "react";
-import {  Register  } from "../../Service/Users.js";
-import { useHistory } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Context } from "../../store/appContext";
+import { Redirect } from "react-router-dom";
 import "./Signup.css"
 
 let email = "";
@@ -8,26 +9,19 @@ let password = "";
 
 const Signup = () =>{
 
-    let history = useHistory();
-    const handleChange = async (e) => {
-        try {
-            const user = {
-                email: email,
-                password: password
-            }
-            e.preventDefault()
-            await Register(user)
-            history.push("/login")
+    const { actions } = useContext(Context);
+    const [redirect, setRedirect] = useState(false);
 
-        } catch { (err) => console.log(err) }
-
-    };
     return(
         <div className="p-5 mt-5">
             <div className="Signup container mb-3 text-center text-white p-4">
             <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Indie+Flower&family=Montserrat:wght@300&family=Pacifico&family=Righteous&display=swap" rel="stylesheet"></link>
             <h3 className="text-center font-weight-bold mb-3">Signup</h3>
-            <form onSubmit={handleChange}>
+            <form 
+            onSubmit={async (e) => {
+            e.preventDefault();
+            await actions.signup(email, password);
+            setRedirect(true);}}>
                 <div>
                     <input
                     type="email"
@@ -52,6 +46,7 @@ const Signup = () =>{
                     </button>
                 </div>
             </form>
+            {redirect ? <Redirect to="/login"></Redirect> : null}
             </div>
       </div>
     );

@@ -23,22 +23,20 @@ def signup_user():
     db.session.commit()
     return jsonify(register_user.serialize()), 201
     
-
-
 @api.route('/login', methods=['POST'])
 def login():
     body=request.get_json(force=True)
-    newuser=db.session.query(User).filter(User.email==body['email']).first()
-    print(newuser.password)
-    if newuser.password == body['password']:
-        access_token = create_access_token(identity={'id': newuser.id})
+    user=db.session.query(User).filter(User.email==body['email']).first()
+    if user.password == body['password']:
+        access_token= create_access_token(identity=user.id)
         return jsonify(access_token),200
     else:
-        return jsonify("ERROR USER NOT EXIST"),401
+        return jsonify("error user not exist"),401
 
 @api.route('/private',methods=["GET"])
 @jwt_required()
 def private():
-    token= get_jwt_identity()
-    newuser = User.query.get(token)
-    return jsonify(newuser.serialize()),200
+    user_token=get_jwt_identity()
+    print(user_token)
+    user=User.query.get(user_token)
+    return jsonify(user.serialize()),200
